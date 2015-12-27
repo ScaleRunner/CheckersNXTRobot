@@ -24,15 +24,15 @@ public class Connection {
 		dataIn = USBLink.openDataInputStream();
 	}
 	
-	public static DataInputStream getDataInputStream(){
+	public DataInputStream getDataInputStream(){
 		return(dataIn);
 	}
 	
-	public static DataOutputStream getDataOutputStream(){
+	public DataOutputStream getDataOutputStream(){
 		return(dataOut);
 	}
 	
-	public static void disconnect(){
+	public void disconnect(){
 		try{
 			dataOut.close();
 			USBLink.close();
