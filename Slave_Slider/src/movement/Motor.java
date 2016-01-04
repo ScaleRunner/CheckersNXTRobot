@@ -28,11 +28,11 @@ public class Motor {
 		int yDistance = currentPos.y - pos.y;
 		
 		int xAngle = 465 * xDistance;
-		int yAngle = 715 * yDistance;
+		int yAngle = 712 * yDistance;
 		xMotor1.rotate(xAngle, true);
 		xMotor2.rotate(xAngle);
 		yMotor.rotate(yAngle);
 		
-		this.currentPos = pos;
+		currentPos = pos;
 	}
 }

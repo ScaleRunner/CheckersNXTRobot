@@ -35,8 +35,6 @@ public class NXT_Slider {
 		
 		Motor motors = new Motor(xMotor1,xMotor2,yMotor);
 		
-		Point point = new Point(0,0);
-		motors.moveTo(point);
 		//Make the thread a "slave"
 		listener.setDaemon(true);
 		listener.start();
@@ -46,11 +44,10 @@ public class NXT_Slider {
 			Command command = listener.getCommand();
 			if(!(command == null)){
 				System.out.println(command.toString());
+				motors.moveTo(command.getPos());
 			}
-			Delay.msDelay(2000);
 			listener.listen();
 		}
-		Delay.msDelay(1000);
 		connection.disconnect();
 	}
 

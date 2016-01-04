@@ -48,7 +48,7 @@ public class Listener extends Thread{
 			if(io){
 				int toDo = getInt();
 				Point point = new Point(getInt(),getInt());
-				if(toDo >= 0 && point.x >= 0 && point.y >= 0){
+				if(toDo > 0 && point.x > 0 && point.y > 0){
 					Command command = new Command(toDo,point);
 					commandList.add(command);
 				}

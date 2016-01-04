@@ -18,6 +18,12 @@ public class Sender {
 		sendInt(command.getPos().x);
 		sendInt(command.getPos().y);
 		System.out.println("Command sent");
+		try {
+			dataOut.flush();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	private void sendInt(int i){

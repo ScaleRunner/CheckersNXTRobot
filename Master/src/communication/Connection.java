@@ -11,9 +11,10 @@ public class Connection {
 	private static DataOutputStream dataOut;
 	private static DataInputStream dataIn;
 
-	public Connection(){
+	public Connection(NXTInfo nxtInfo){
 		link = new NXTConnector();
-		if(!link.connectTo("usb://")){
+		
+		if(!link.connectTo(nxtInfo.name, nxtInfo.deviceAddress, nxtInfo.protocol)){
 			System.out.println("No NXT found using USB");
 		}
 		else{
@@ -21,10 +22,6 @@ public class Connection {
 			dataIn = new DataInputStream(link.getInputStream());
 			System.out.println("Connection established");
 		}
-		NXTInfo slider = link.getNXTInfo();
-		System.out.println(slider.deviceAddress);
-		System.out.println(slider.name);
-		System.out.println(slider.protocol);
 	}
 	
 	public DataOutputStream getOutputStream(){

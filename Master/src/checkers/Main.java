@@ -1,6 +1,13 @@
 package checkers;
 
+import java.awt.Point;
+import java.util.Scanner;
+
+import javax.swing.plaf.synth.SynthSpinnerUI;
+
+import communication.Command;
 import communication.Connection;
+import communication.Sender;
 import lejos.pc.comm.NXTInfo;
 import lejos.util.Delay;
 
@@ -10,16 +17,29 @@ public class Main {
 		NXTInfo slider = new NXTInfo(1, "Slider", "0016531AFE2A");
 		NXTInfo gripper = new NXTInfo(1, "Gripper", "00165305B61A");
 		
-		Connection connection = new Connection();
-//		Sender sender = new Sender(connection);
-//		
-//		Command command1 = new Command(1, new Point(5,5));
-//		Command command2 = new Command(2, new Point(1,2));
-//		sender.sendCommand(command1);
-//		sender.sendCommand(command2);
+//		Connection connectionSlider = new Connection(slider);
+//		Sender senderSlider = new Sender(connectionSlider);
+		Connection connectionGripper = new Connection(gripper);
+		Sender senderGriper = new Sender(connectionGripper);
 		
-		Delay.msDelay(1000);
-		connection.disconnect();
+//		Scanner scanner = new Scanner(System.in);
+//		
+//		int i = 0;
+//		while(i <= 5){
+//			int action = scanner.nextInt();
+//			int x = scanner.nextInt();
+//			int y = scanner.nextInt();
+//			
+//			Command command = new Command(action, new Point(x,y));
+//			senderSlider.sendCommand(command);
+//			i++;
+//			System.out.println("i = " + i);
+//		}
+//		scanner.close();
+//		System.out.println("scanner closed");
+//		
+//		connectionSlider.disconnect();
+		connectionGripper.disconnect();
 		//Game g = new Game();
 		//g.play();	
 	}
