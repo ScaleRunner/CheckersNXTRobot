@@ -8,12 +8,13 @@ import java.util.ArrayList;
 
 public class Listener extends Thread{
 	private boolean io = false;
-	private static DataInputStream dataIn;
-	private static ArrayList<Command> commandList;
+	private DataInputStream dataIn;
+	private ArrayList<Command> commandList;
 	
 	public Listener(Connection connection){
 		dataIn = connection.getDataInputStream();
 		commandList = new ArrayList<Command>();
+		System.out.println("Listener created");
 	}
 	
 	public void listen(){

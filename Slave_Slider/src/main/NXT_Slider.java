@@ -3,15 +3,14 @@
  */
 package main;
 
-import java.awt.Point;
-
 import connection.Command;
 import connection.Connection;
 import connection.Listener;
+import connection.Sender;
 import lejos.nxt.Button;
+import lejos.nxt.LCD;
 import lejos.nxt.MotorPort;
 import lejos.nxt.NXTRegulatedMotor;
-import lejos.util.Delay;
 import movement.Motor;
 
 /**
@@ -19,36 +18,39 @@ import movement.Motor;
  *
  */
 public class NXT_Slider {
+	private static NXTRegulatedMotor xMotor1 = new NXTRegulatedMotor(MotorPort.A);
+	private static NXTRegulatedMotor xMotor2 = new NXTRegulatedMotor(MotorPort.B);
+	private static NXTRegulatedMotor yMotor = new NXTRegulatedMotor(MotorPort.C);
+	private static Connection connection = new Connection();
+	private static Listener listener = new Listener(connection);
+	private static Sender sender = new Sender(connection);
+	private static Motor motors = new Motor(xMotor1,xMotor2,yMotor);
 	
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		Connection connection = new Connection();
-		
-		//Making the listener thread
-		Listener listener = new Listener(connection);
-		System.out.println("Listener created");
-		NXTRegulatedMotor xMotor1 = new NXTRegulatedMotor(MotorPort.A);
-		NXTRegulatedMotor xMotor2 = new NXTRegulatedMotor(MotorPort.B);
-		NXTRegulatedMotor yMotor = new NXTRegulatedMotor(MotorPort.C);
-		
-		Motor motors = new Motor(xMotor1,xMotor2,yMotor);
-		
+	public static void main(String[] args) {		
 		//Make the thread a "slave"
 		listener.setDaemon(true);
 		listener.start();
 		listener.listen();
+		LCD.clear();
 		
+		int i = 0;
 		while(!Button.ESCAPE.isDown()){
 			Command command = listener.getCommand();
 			if(!(command == null)){
-				System.out.println(command.toString());
-				motors.moveTo(command.getPos());
+				if(i == 0){
+					motors.setStartPos(command.getPos());
+					i++;
+					System.out.println("Starpositie = " + command.getPos().toString());
+				} 
+				else {
+					System.out.println(command.toString());
+					motors.moveTo(command.getPos());
+				}
+//				sender.sendDone();
+//				System.out.println("Done");
 			}
 			listener.listen();
 		}
 		connection.disconnect();
 	}
-
 }

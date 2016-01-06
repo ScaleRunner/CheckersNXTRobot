@@ -10,7 +10,7 @@ public class Sender {
 	private static DataOutputStream dataOut;
 	
 	public Sender(Connection connection){
-		dataOut = connection.getOutputStream();
+		dataOut = connection.getDataOutputStream();
 	}
 	
 	public void sendCommand(Command command){

@@ -9,10 +9,10 @@ import lejos.nxt.comm.USB;
 import lejos.nxt.comm.USBConnection;
 
 public class Connection {
-	private static DataOutputStream dataOut;
-	private static DataInputStream dataIn;
-	private static USBConnection USBLink;
-	private static BTConnection BTLink;
+	private DataOutputStream dataOut;
+	private DataInputStream dataIn;
+	private USBConnection USBLink;
+	private BTConnection BTLink;
 	
 	public Connection(){
 		System.out.println("Waiting...");
@@ -22,6 +22,7 @@ public class Connection {
 		USBLink = USB.waitForConnection();
 		dataOut = USBLink.openDataOutputStream();
 		dataIn = USBLink.openDataInputStream();
+		System.out.println("Connected!");
 	}
 	
 	public DataInputStream getDataInputStream(){

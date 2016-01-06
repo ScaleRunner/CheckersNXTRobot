@@ -24,11 +24,11 @@ public class Connection {
 		}
 	}
 	
-	public DataOutputStream getOutputStream(){
+	public DataOutputStream getDataOutputStream(){
 		return dataOut;
 	}
 	
-	public DataInputStream getInputStream(){
+	public DataInputStream getDataInputStream(){
 		return dataIn;
 	}
 	

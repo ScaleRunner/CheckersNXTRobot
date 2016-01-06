@@ -30,9 +30,19 @@ public class Motor {
 		int xAngle = 465 * xDistance;
 		int yAngle = 712 * yDistance;
 		xMotor1.rotate(xAngle, true);
-		xMotor2.rotate(xAngle);
+		if(Math.abs(yDistance) > Math.abs(xDistance))
+			xMotor2.rotate(xAngle, true); else
+				xMotor2.rotate(xAngle);
 		yMotor.rotate(yAngle);
 		
 		currentPos = pos;
+	}
+	
+	public void setStartPos(Point pos){
+		currentPos = pos;
+	}
+	
+	public Point getStartPos(){
+		return currentPos;
 	}
 }
