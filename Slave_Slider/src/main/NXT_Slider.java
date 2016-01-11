@@ -33,21 +33,21 @@ public class NXT_Slider {
 		listener.listen();
 		LCD.clear();
 		
-		int i = 0;
+		Boolean firstCommand = true;
 		while(!Button.ESCAPE.isDown()){
 			Command command = listener.getCommand();
 			if(!(command == null)){
-				if(i == 0){
+				if(firstCommand){
 					motors.setStartPos(command.getPos());
-					i++;
+					firstCommand = false;
 					System.out.println("Starpositie = " + command.getPos().toString());
 				} 
 				else {
 					System.out.println(command.toString());
 					motors.moveTo(command.getPos());
 				}
-//				sender.sendDone();
-//				System.out.println("Done");
+				sender.sendDone();
+				System.out.println("Done");
 			}
 			listener.listen();
 		}

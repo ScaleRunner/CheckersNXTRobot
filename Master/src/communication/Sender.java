@@ -7,7 +7,11 @@ import lejos.nxt.LCD;
 
 public class Sender {
 	
-	private static DataOutputStream dataOut;
+	private DataOutputStream dataOut;
+	
+	public Sender(DataOutputStream dataOut){
+		this.dataOut = dataOut;
+	}
 	
 	public Sender(Connection connection){
 		dataOut = connection.getDataOutputStream();

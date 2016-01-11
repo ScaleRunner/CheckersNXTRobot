@@ -30,6 +30,17 @@ public class Slider implements NXT{
 	public void disconnect() {
 		connection.disconnect();
 	}
+
+	@Override
+	public void waitForDone() {
+		listener.listen();
+		Boolean done = false;
+		System.out.println("Checking for done");
+		while(!done){
+			done = listener.done();
+		}
+		System.out.println("Done");
+	}
 	
 	
 }

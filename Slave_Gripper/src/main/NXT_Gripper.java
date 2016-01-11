@@ -40,8 +40,12 @@ public class NXT_Gripper {
 			Command command = listener.getCommand();
 			if(!(command == null)){
 				System.out.println(command.toString());
-				gripper.pickUp();
-				gripper.putDown();
+				if(command.getCommand()==2){
+					gripper.pickUp();
+				}
+				else{
+					gripper.putDown();
+				}
 			}
 			listener.listen();
 		}

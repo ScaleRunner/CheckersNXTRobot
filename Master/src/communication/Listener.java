@@ -7,8 +7,8 @@ import java.util.ArrayList;
 
 public class Listener extends Thread{
 	private boolean io = false;
-	private static DataInputStream dataIn;
-	private static ArrayList<Integer> commandList;
+	private DataInputStream dataIn;
+	private ArrayList<Integer> commandList;
 	
 	public Listener(Connection connection){
 		dataIn = connection.getDataInputStream();

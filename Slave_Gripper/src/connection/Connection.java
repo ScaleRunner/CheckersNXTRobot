@@ -5,7 +5,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import lejos.nxt.comm.BTConnection;
-import lejos.nxt.comm.USB;
+import lejos.nxt.comm.Bluetooth;
 import lejos.nxt.comm.USBConnection;
 
 public class Connection {
@@ -16,12 +16,12 @@ public class Connection {
 	
 	public Connection(){
 		System.out.println("Waiting...");
-	    //BTLink = Bluetooth.waitForConnection();    
-	    //dataOut = BTLink.openDataOutputStream();
-	    //dataIn = BTLink.openDataInputStream();
-		USBLink = USB.waitForConnection();
-		dataOut = USBLink.openDataOutputStream();
-		dataIn = USBLink.openDataInputStream();
+	    BTLink = Bluetooth.waitForConnection();
+	    dataOut = BTLink.openDataOutputStream();
+	    dataIn = BTLink.openDataInputStream();
+//		USBLink = USB.waitForConnection();
+//		dataOut = USBLink.openDataOutputStream();
+//		dataIn = USBLink.openDataInputStream();
 		System.out.println("Connected!");
 	}
 	

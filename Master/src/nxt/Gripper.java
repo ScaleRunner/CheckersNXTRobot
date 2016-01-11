@@ -29,4 +29,10 @@ public class Gripper implements NXT{
 	public void disconnect() {
 		connection.disconnect();
 	}
+
+	@Override
+	public void waitForDone() {
+		// TODO Auto-generated method stub
+		
+	}
 }
