@@ -4,10 +4,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import javax.bluetooth.RemoteDevice;
-
 import lejos.nxt.LCD;
-import lejos.nxt.comm.Bluetooth;
 import lejos.nxt.comm.NXTConnection;
 import lejos.nxt.comm.USB;
 import lejos.nxt.comm.USBConnection;

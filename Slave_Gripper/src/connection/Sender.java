@@ -13,7 +13,7 @@ public class Sender {
 	
 	public void sendDone(){
 		try{
-			dataOut.writeInt(1);
+			dataOut.write(1);
 			dataOut.flush();
 		}catch(IOException ioE){
 			ioE.getMessage();

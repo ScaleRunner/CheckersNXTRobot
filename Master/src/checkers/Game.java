@@ -19,7 +19,7 @@ public class Game implements Runnable{
 	}
 	
 	public Game (Player p1, Player p2){
-		this (new Board (10), p1, p2);
+		this (new Board (6), p1, p2);
 	}
 	
 	public Game (Board b, Player p1, Player p2){

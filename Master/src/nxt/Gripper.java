@@ -18,11 +18,13 @@ public class Gripper implements NXT{
 		//Make the thread a "slave"
 		listener.setDaemon(true);
 		listener.start();
+		listener.listen();
 	}
 
 	@Override
 	public void sendCommand(Command command) {
 		sender.sendCommand(command);
+		waitForDone();
 	}
 
 	@Override
@@ -32,7 +34,11 @@ public class Gripper implements NXT{
 
 	@Override
 	public void waitForDone() {
-		// TODO Auto-generated method stub
-		
+		Boolean done = false;
+		System.out.println("Checking for done");
+		while(!done){
+			done = listener.done();
+		}
+		System.out.println("Done");
 	}
 }

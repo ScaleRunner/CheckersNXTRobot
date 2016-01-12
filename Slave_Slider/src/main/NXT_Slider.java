@@ -11,6 +11,7 @@ import lejos.nxt.Button;
 import lejos.nxt.LCD;
 import lejos.nxt.MotorPort;
 import lejos.nxt.NXTRegulatedMotor;
+import lejos.util.Delay;
 import movement.Motor;
 
 /**
@@ -18,12 +19,13 @@ import movement.Motor;
  *
  */
 public class NXT_Slider {
-	private static NXTRegulatedMotor xMotor1 = new NXTRegulatedMotor(MotorPort.A);
-	private static NXTRegulatedMotor xMotor2 = new NXTRegulatedMotor(MotorPort.B);
-	private static NXTRegulatedMotor yMotor = new NXTRegulatedMotor(MotorPort.C);
 	private static Connection connection = new Connection();
 	private static Listener listener = new Listener(connection);
 	private static Sender sender = new Sender(connection);
+	
+	private static NXTRegulatedMotor xMotor1 = new NXTRegulatedMotor(MotorPort.A);
+	private static NXTRegulatedMotor xMotor2 = new NXTRegulatedMotor(MotorPort.B);
+	private static NXTRegulatedMotor yMotor = new NXTRegulatedMotor(MotorPort.C);
 	private static Motor motors = new Motor(xMotor1,xMotor2,yMotor);
 	
 	public static void main(String[] args) {		
@@ -31,7 +33,6 @@ public class NXT_Slider {
 		listener.setDaemon(true);
 		listener.start();
 		listener.listen();
-		LCD.clear();
 		
 		Boolean firstCommand = true;
 		while(!Button.ESCAPE.isDown()){
@@ -46,8 +47,9 @@ public class NXT_Slider {
 					System.out.println(command.toString());
 					motors.moveTo(command.getPos());
 				}
+				System.out.println("Sending...");
 				sender.sendDone();
-				System.out.println("Done");
+				System.out.println("Sent");
 			}
 			listener.listen();
 		}

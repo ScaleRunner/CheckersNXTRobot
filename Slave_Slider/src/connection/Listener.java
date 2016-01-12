@@ -14,6 +14,7 @@ public class Listener extends Thread{
 	public Listener(Connection connection){
 		dataIn = connection.getDataInputStream();
 		commandList = new ArrayList<Command>();
+		System.out.println("Listener Created");
 	}
 	
 	public void listen(){

@@ -16,11 +16,19 @@ public class Motor {
 	
 	protected int squareSize = 4;
 	private static Point currentPos = new Point(7,7);
+	private int motorSpeed = 250;
 	
 	public Motor (NXTRegulatedMotor x1, NXTRegulatedMotor x2, NXTRegulatedMotor y){
 		this.xMotor1 = x1;
 		this.xMotor2 = x2;
 		this.yMotor = y;
+		setSpeed(motorSpeed);
+	}
+	
+	public void setSpeed(int speed){
+		this.xMotor1.setSpeed(speed);
+		this.xMotor2.setSpeed(speed);
+		this.yMotor.setSpeed(speed);
 	}
 	
 	public void moveTo(Point pos){

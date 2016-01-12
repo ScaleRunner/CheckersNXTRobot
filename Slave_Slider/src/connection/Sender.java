@@ -8,12 +8,12 @@ public class Sender {
 	private DataOutputStream dataOut;
 	
 	public Sender(Connection connection){
-		dataOut = connection.getDataOutputStream();
+		this.dataOut = connection.getDataOutputStream();
 	}
 	
 	public void sendDone(){
 		try{
-			dataOut.writeInt(1);
+			dataOut.write(1);
 			dataOut.flush();
 		}catch(IOException ioE){
 			ioE.getMessage();

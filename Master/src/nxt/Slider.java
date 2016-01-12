@@ -1,5 +1,7 @@
 package nxt;
 
+import java.io.IOException;
+
 import communication.Command;
 import communication.Connection;
 import communication.Listener;
@@ -18,12 +20,13 @@ public class Slider implements NXT{
 		//Make the thread a "slave"
 		listener.setDaemon(true);
 		listener.start();
+		listener.listen();
 	}
 
 	@Override
 	public void sendCommand(Command command) {
 		sender.sendCommand(command);
-		
+		waitForDone();
 	}
 
 	@Override
@@ -33,14 +36,11 @@ public class Slider implements NXT{
 
 	@Override
 	public void waitForDone() {
-		listener.listen();
 		Boolean done = false;
 		System.out.println("Checking for done");
 		while(!done){
 			done = listener.done();
 		}
 		System.out.println("Done");
-	}
-	
-	
+	}	
 }

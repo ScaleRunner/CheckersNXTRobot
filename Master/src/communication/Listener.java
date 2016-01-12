@@ -5,6 +5,8 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import lejos.util.Delay;
+
 public class Listener extends Thread{
 	private boolean io = false;
 	private DataInputStream dataIn;
@@ -21,24 +23,21 @@ public class Listener extends Thread{
 	
 	public boolean done(){
 		if (commandList.size() > 0){
-			int i = commandList.get(0);
 			commandList.remove(0);
-			System.out.println("Ik heb iets binnen gekregen");
 			return true;
 		}
 		return false;
 	}
 	
 	private int getInt(){
+		int i = -1;
 		try{
-			if(dataIn.available()>0){
-				int i = dataIn.readInt();
-				return i;
-			}
+			i = dataIn.read();
+			return i;
 		} catch(IOException ioException){
 			System.out.println("Could not read Int");
 		}
-		return -1;
+		return i;
 	}
 	
 	public void run(){
@@ -48,9 +47,6 @@ public class Listener extends Thread{
 				if(i > 0){
 					System.out.println(i);
 					commandList.add(i);
-				}
-				else{
-					io = false;
 				}
 			}
 		}

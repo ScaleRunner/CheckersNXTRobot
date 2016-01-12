@@ -21,17 +21,18 @@ public class Sender {
 		sendInt(command.getCommand());
 		sendInt(command.getPos().x);
 		sendInt(command.getPos().y);
-		System.out.println("Command sent");
+		System.out.println("Sending...");
 		try {
 			dataOut.flush();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println("Flushed");
 	}
 	
 	private void sendInt(int i){
 		try{
+			System.out.println("sent i = " + i);
 			dataOut.writeInt(i);
 		}catch(IOException ioE){
 			ioE.getMessage();
