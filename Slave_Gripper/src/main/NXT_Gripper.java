@@ -24,7 +24,7 @@ public class NXT_Gripper {
 	public static NXTRegulatedMotor motor = new NXTRegulatedMotor(MotorPort.A);
 	public static Gripper gripper = new Gripper(motor);
 	
-	public static void main(String[] args) {		
+	public static void main(String[] args) {
 		//Make the thread a "slave"
 		listener.setDaemon(true);
 		listener.start();
@@ -48,5 +48,4 @@ public class NXT_Gripper {
 		}
 		connection.disconnect();
 	}
-
 }

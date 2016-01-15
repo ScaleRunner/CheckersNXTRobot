@@ -15,7 +15,7 @@ public class Motor {
 	private NXTRegulatedMotor yMotor;
 	
 	protected int squareSize = 4;
-	private static Point currentPos = new Point(7,7);
+	private static Point currentPos = new Point(6,6);
 	private int motorSpeed = 250;
 	
 	public Motor (NXTRegulatedMotor x1, NXTRegulatedMotor x2, NXTRegulatedMotor y){
@@ -38,7 +38,7 @@ public class Motor {
 		int xAngle = 465 * xDistance;
 		int yAngle = 712 * yDistance;
 		xMotor1.rotate(xAngle, true);
-		if(Math.abs(yDistance) > Math.abs(xDistance))
+		if(Math.abs(yDistance) >= Math.abs(xDistance) && pos.x>0 && pos.y>0)
 			xMotor2.rotate(xAngle, true); else
 				xMotor2.rotate(xAngle);
 		yMotor.rotate(yAngle);

@@ -56,6 +56,36 @@ public class PlayerAI implements Player{
 		return minScore;
 	}
 	
+	public Move doAnyMove(Board board){
+		ArrayList <Move> legalMoves = board.getAllLegalMoves();
+		return legalMoves.get(0);
+	}
+	
+	public Move getMove2(Board board){
+		ArrayList <Move> legalMoves = board.getAllLegalMoves();
+		Move bestMove = legalMoves.get(0);
+		int bestScore = Integer.MIN_VALUE;
+		int currentBest = Integer.MIN_VALUE;
+		int alpha = Integer.MIN_VALUE;
+		int beta = Integer.MAX_VALUE;
+		
+		for(int move = 0; move < legalMoves.size(); move++){
+			int currentDepth = 0;
+			Board newBoard = board.deepCopy();
+			newBoard.doMove(legalMoves.get(move));
+			
+			currentBest = minValue(newBoard, currentDepth, alpha, beta);
+			System.out.println("Currentbest: " + currentBest + " " + legalMoves.get(move));
+			if (currentBest > bestScore){
+				bestScore = currentBest;
+				Move betterMove = legalMoves.get(move);
+				bestMove.copy(bestMove, betterMove);
+			}
+		}
+		System.out.println("Player " + (board.isWhitePlaying()? "1" : "2") + " has selected " + bestScore + " " + bestMove);
+		return bestMove;
+	}
+	
 	@Override
 	public Move getMove(Board board) {
 		System.out.println("Waiting for player " + (board.isWhitePlaying()? "1" : "2"));

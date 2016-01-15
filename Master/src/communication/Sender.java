@@ -19,20 +19,19 @@ public class Sender {
 	
 	public void sendCommand(Command command){
 		sendInt(command.getCommand());
-		sendInt(command.getPos().x);
-		sendInt(command.getPos().y);
-		System.out.println("Sending...");
+		sendInt(command.getPos().x+2);
+		sendInt(command.getPos().y+2);
+//		System.out.println("Sending command: " + command.toString());
 		try {
 			dataOut.flush();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		System.out.println("Flushed");
+//		System.out.println("Sending Done!");
 	}
 	
 	private void sendInt(int i){
 		try{
-			System.out.println("sent i = " + i);
 			dataOut.writeInt(i);
 		}catch(IOException ioE){
 			ioE.getMessage();

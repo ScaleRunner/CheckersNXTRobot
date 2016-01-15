@@ -1,27 +1,21 @@
 package connection;
 
+import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
 import lejos.nxt.comm.BTConnection;
 import lejos.nxt.comm.Bluetooth;
-import lejos.nxt.comm.USBConnection;
 
 public class Connection {
-	private DataOutputStream dataOut;
-	private DataInputStream dataIn;
-	private USBConnection USBLink;
-	private BTConnection BTLink;
+	private BTConnection BTLink = Bluetooth.waitForConnection();
+//	private USBConnection USBLink = USB.waitForConnection();
+	
+	private DataOutputStream dataOut = BTLink.openDataOutputStream();
+	private DataInputStream dataIn = new DataInputStream(new BufferedInputStream(BTLink.openDataInputStream(),1024));
 	
 	public Connection(){
-		System.out.println("Waiting...");
-	    BTLink = Bluetooth.waitForConnection();
-	    dataOut = BTLink.openDataOutputStream();
-	    dataIn = BTLink.openDataInputStream();
-//		USBLink = USB.waitForConnection();
-//		dataOut = USBLink.openDataOutputStream();
-//		dataIn = USBLink.openDataInputStream();
 		System.out.println("Connected!");
 	}
 	
@@ -36,7 +30,9 @@ public class Connection {
 	public void disconnect(){
 		try{
 			dataOut.close();
-			USBLink.close();
+			dataIn.close();
+			BTLink.close();
+//			USBLink.close();
 		}
 		catch (IOException IOe){
 			System.out.println("Error closing connection");

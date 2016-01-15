@@ -3,15 +3,15 @@
  */
 package main;
 
+import java.awt.Point;
+
 import connection.Command;
 import connection.Connection;
 import connection.Listener;
 import connection.Sender;
 import lejos.nxt.Button;
-import lejos.nxt.LCD;
 import lejos.nxt.MotorPort;
 import lejos.nxt.NXTRegulatedMotor;
-import lejos.util.Delay;
 import movement.Motor;
 
 /**
@@ -34,25 +34,19 @@ public class NXT_Slider {
 		listener.start();
 		listener.listen();
 		
-		Boolean firstCommand = true;
+//		Boolean firstCommand = true;
 		while(!Button.ESCAPE.isDown()){
 			Command command = listener.getCommand();
 			if(!(command == null)){
-				if(firstCommand){
-					motors.setStartPos(command.getPos());
-					firstCommand = false;
-					System.out.println("Starpositie = " + command.getPos().toString());
-				} 
-				else {
-					System.out.println(command.toString());
-					motors.moveTo(command.getPos());
-				}
+				System.out.println(command.toString());
+				motors.moveTo(new Point(command.getPos().x-1, command.getPos().y-1));
 				System.out.println("Sending...");
 				sender.sendDone();
 				System.out.println("Sent");
 			}
 			listener.listen();
 		}
+		motors.moveTo(new Point(6,6));
 		connection.disconnect();
 	}
 }

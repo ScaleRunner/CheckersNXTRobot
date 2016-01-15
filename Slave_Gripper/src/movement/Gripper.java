@@ -12,10 +12,10 @@ public class Gripper {
 	}
 	
 	public void pickUp(){
-		motor.rotate(660);
+		motor.rotate(775);
 	}
 	
 	public void putDown(){
-		motor.rotate(-660);
+		motor.rotate(-775);
 	}
 }

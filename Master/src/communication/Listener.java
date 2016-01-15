@@ -45,7 +45,7 @@ public class Listener extends Thread{
 			if(io){
 				int i = getInt();
 				if(i > 0){
-					System.out.println(i);
+//					System.out.println(i);
 					commandList.add(i);
 				}
 			}

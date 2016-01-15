@@ -1,5 +1,6 @@
 package communication;
 
+import java.io.BufferedOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 
@@ -23,7 +24,7 @@ public class Connection {
 			System.out.println("No NXT found using protocol " + nxtInfo.protocol);
 		}
 		else{
-			dataOut = new DataOutputStream(link.getOutputStream());
+			dataOut = new DataOutputStream(new BufferedOutputStream(link.getOutputStream(),1024));
 			dataIn = new DataInputStream(link.getInputStream());
 			System.out.println("Connection with " + nxtInfo.name + " made.");
 		}
