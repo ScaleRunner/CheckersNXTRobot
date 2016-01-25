@@ -12,7 +12,7 @@ public class PlayerAI implements Player{
 	}
 		
 	//ZWART
-	protected int maxValue(Board board, int currentDepth, int alpha, int beta){
+	private int maxValue(Board board, int currentDepth, int alpha, int beta){
 		board.setWhitePlaying(false);
 		ArrayList <Move> legalMoves = board.getAllLegalMoves();
 		int maxScore = Integer.MIN_VALUE;
@@ -34,7 +34,7 @@ public class PlayerAI implements Player{
 	}
 	
 	//WIT
-	protected int minValue(Board board, int currentDepth, int alpha, int beta){
+	private int minValue(Board board, int currentDepth, int alpha, int beta){
 		board.setWhitePlaying(true);
 		ArrayList <Move> legalMoves = board.getAllLegalMoves();
 		int minScore = Integer.MAX_VALUE;
@@ -63,7 +63,14 @@ public class PlayerAI implements Player{
 	
 	public Move getMove2(Board board){
 		ArrayList <Move> legalMoves = board.getAllLegalMoves();
-		Move bestMove = legalMoves.get(0);
+		Move bestMove;
+		if(legalMoves.size() > 0){
+			bestMove = legalMoves.get(0);
+		}
+		else{
+			return null;
+		}
+		System.out.println("Calculating....");
 		int bestScore = Integer.MIN_VALUE;
 		int currentBest = Integer.MIN_VALUE;
 		int alpha = Integer.MIN_VALUE;
@@ -90,29 +97,8 @@ public class PlayerAI implements Player{
 	public Move getMove(Board board) {
 		System.out.println("Waiting for player " + (board.isWhitePlaying()? "1" : "2"));
 		System.out.println("Calculating...");
-		MoveValue bestMove = new MoveValue();
+		MoveValue bestMove = new MoveValue(maxDepth);
 		bestMove = bestMove.alphabeta(board, 0, Integer.MIN_VALUE, Integer.MAX_VALUE, true);
-//		ArrayList <Move> legalMoves = board.getAllLegalMoves();
-//		Move bestMove = legalMoves.get(0);
-//		int bestScore = Integer.MIN_VALUE;
-//		int currentBest = Integer.MIN_VALUE;
-//		int alpha = Integer.MIN_VALUE;
-//		int beta = Integer.MAX_VALUE;
-//		
-//		for(int move = 0; move < legalMoves.size(); move++){
-//			int currentDepth = 0;
-//			Board newBoard = board.deepCopy();
-//			newBoard.doMove(legalMoves.get(move));
-//			
-//			currentBest = minValue(newBoard, currentDepth, alpha, beta);
-//			System.out.println("Currentbest: " + currentBest + " " + legalMoves.get(move));
-//			if (currentBest > bestScore){
-//				bestScore = currentBest;
-//				Move betterMove = legalMoves.get(move);
-//				bestMove.copy(bestMove, betterMove);
-//			}
-//		}
-//		System.out.println("Player " + (board.isWhitePlaying()? "1" : "2") + " has selected " + bestScore + " " + bestMove);
 		return bestMove.getMove();
 	}
 

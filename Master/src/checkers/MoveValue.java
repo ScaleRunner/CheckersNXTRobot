@@ -17,10 +17,14 @@ public class MoveValue {
 	private int maxDepth = 6;
 	
 	public MoveValue(){
-		returnValue = 0;
+		
 	}
 	
-	public MoveValue(int returnValue){
+	public MoveValue(int maxDepth){
+		this.maxDepth = maxDepth;
+	}
+	
+	public MoveValue(int dummy, int returnValue){
 		this.returnValue = returnValue;
 	}
 	
@@ -35,11 +39,11 @@ public class MoveValue {
 		Iterator<Move> movesIterator = moves.iterator();
 		if (depth == this.maxDepth || board.isLose("black") || board.isWin("black")){
 			value = heuristic.totalHeuristic(board);
-			return new MoveValue(value);
+			return new MoveValue(0,value);
 		}
 		
-		MoveValue returnMove;
-		MoveValue bestMove = null;
+		MoveValue returnMove = new MoveValue();
+		MoveValue bestMove = new MoveValue();
 		
 		if(maximizingPlayer){
 			while(movesIterator.hasNext()){
@@ -47,9 +51,15 @@ public class MoveValue {
 				Board newBoard = board.deepCopy();
 				newBoard.doMove(currentMove);
 				returnMove = alphabeta(newBoard, depth + 1, alpha, beta, !maximizingPlayer);
-				if(bestMove == null || bestMove.returnValue < returnMove.returnValue){
+				if(bestMove == null){
 					bestMove = returnMove;
 					bestMove.returnMove = currentMove;
+				}
+				else{
+					if( bestMove.returnValue < returnMove.returnValue){
+						bestMove = returnMove;
+						bestMove.returnMove = currentMove;
+					}
 				}
 				if(returnMove.returnValue > alpha){
 					alpha = returnMove.returnValue;

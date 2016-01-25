@@ -42,15 +42,13 @@ public class Gripper implements NXT{
 	public void waitForDone() {
 		Boolean done = false;
 		timer.reset();
-//		System.out.println("Checking for done");
 		while(!done){
 			done = listener.done();
-			if(!done && (timer.time() > 15)){
+			if(!done && (timer.time() > 10)){
 				done = true;
 				System.out.println("RESEND: " + this.command.toString());
 				sendCommand(this.command);
 			}
 		}
-//		System.out.println("Done");
 	}
 }

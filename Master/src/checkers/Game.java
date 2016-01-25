@@ -18,7 +18,7 @@ public class Game extends Thread{
 	private ArrayList<Move> toDoMoves = new ArrayList<Move>();
 
 	public Game (){
-		this (new PlayerHuman(), new PlayerAI(100));
+		this (new PlayerHuman(), new PlayerAI(8));
 	}
 	
 	public Game (Player p1, Player p2){
@@ -113,11 +113,10 @@ public class Game extends Thread{
 				board.setWhitePlaying(false);
 				do {
 					try{
-						move = p2.getMove(this.board);
+						move = p2.getMove2(this.board);
 					} catch(NullPointerException nullPointer){
-						System.out.println("Other Algorithm");
-						move = p2.getMove2(board);
-						toDoMoves.add(move);
+						System.out.println("Crashhhhhh");
+						move = null;
 					}
 					if(move == null){
 						System.out.println("Game Over! White won!");

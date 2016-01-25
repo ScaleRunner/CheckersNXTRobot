@@ -16,7 +16,7 @@ public class Motor {
 	
 	protected int squareSize = 4;
 	private static Point currentPos = new Point(6,6);
-	private int motorSpeed = 250;
+	private int motorSpeed = 500;
 	
 	public Motor (NXTRegulatedMotor x1, NXTRegulatedMotor x2, NXTRegulatedMotor y){
 		this.xMotor1 = x1;

@@ -8,14 +8,14 @@ public class Gripper {
 	
 	public Gripper(NXTRegulatedMotor motor){
 		this.motor = motor;
-		this.motor.setSpeed(200);
+		this.motor.setSpeed(400);
 	}
 	
 	public void pickUp(){
-		motor.rotate(775);
+		motor.rotate(725);
 	}
 	
 	public void putDown(){
-		motor.rotate(-775);
+		motor.rotate(-725);
 	}
 }
