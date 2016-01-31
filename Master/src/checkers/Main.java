@@ -1,26 +1,32 @@
 package checkers;
 
-import java.awt.Point;
+import nxt.BrickMaster;
 
-import communication.Command;
-import communication.Connection;
-import communication.Sender;
-import lejos.util.Delay;
 
-public class Main {
-
+public class Main {	
+	private static BrickMaster brickMaster = new BrickMaster();
+	private static Game game = new Game();
+	
 	public static void main(String[] args) {
-		Connection connection = new Connection();
-		Sender sender = new Sender(connection);
+		game.start();
 		
-		Command command1 = new Command(1, new Point(5,5));
-		Command command2 = new Command(2, new Point(1,2));
-		sender.sendCommand(command1);
-		sender.sendCommand(command2);
+//		brickMaster.sync();
 		
-		Delay.msDelay(1000);
-		connection.disconnect();
-		//Game g = new Game();
-		//g.play();	
+//		//Play Without Bricks
+//		while(!game.gameOver())
+//			game.continueGame();
+		
+		while(!game.gameOver()){
+			if(!game.isRunning()){
+				do{
+					Move move = game.getMove();
+					if(!(move == null)){
+						System.out.println("MOVE:" + move.toString());
+						brickMaster.doMove(move);
+					}
+				} while(game.availableMoves()>0);				
+				game.continueGame();
+			}
+		}
 	}
 }

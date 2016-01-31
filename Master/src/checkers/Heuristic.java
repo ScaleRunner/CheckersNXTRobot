@@ -17,16 +17,7 @@ public class Heuristic {
 	}
 
 	private int pawns(){
-		int count = 0;
-		for (int i = 0; i < this.size; i++){
-			for (int j = 0; j < this.size; j++){
-				if (board.getValue(i, j) == Cell.BLACK)
-					count ++;
-				if (board.getValue(i, j) == Cell.WHITE)
-					count --;
-			}
-		}
-		return count;
+		return 2*board.blackPieces()-board.whitePieces();
 	}
 	
 	private int kings(){
@@ -70,25 +61,23 @@ public class Heuristic {
 	
 	//Returns the total heuristic value
 	public int totalHeuristic(Board board){
+		int heuristic = 0;
+		
 		if(board.isWin("black")){
-			return Integer.MAX_VALUE - 100;
+			heuristic+= -500;
 		}
 		if(board.isLose("black")){
-			return Integer.MIN_VALUE + 100;
+			heuristic += 500;
 		}
 		
 		this.board = board;
 		this.size = board.getSize();
 		
-		int heuristic = 0;
-		heuristic = pawns() *2
+		heuristic = heuristic
+					+ pawns() *2
 					+ kings()*5
 					+ safePawns()
-					+ attackingPawns()
-					//stoneCount()
-					//+ hitCount()
-					//+ crownCount() * 2	Time complexity off the damn Charts
-					//+ sideStones()
+//					+ attackingPawns()
 					;
 		return heuristic;
 	}		

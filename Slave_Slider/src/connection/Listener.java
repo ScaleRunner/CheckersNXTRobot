@@ -8,12 +8,13 @@ import java.util.ArrayList;
 
 public class Listener extends Thread{
 	private boolean io = false;
-	private static DataInputStream dataIn;
-	private static ArrayList<Command> commandList;
+	private DataInputStream dataIn;
+	private ArrayList<Command> commandList;
 	
 	public Listener(Connection connection){
 		dataIn = connection.getDataInputStream();
 		commandList = new ArrayList<Command>();
+		System.out.println("Listener Created");
 	}
 	
 	public void listen(){
@@ -38,7 +39,7 @@ public class Listener extends Thread{
 			commandList.remove(0);
 			return(command);
 		} else{
-			System.out.println("No commands available");
+//			System.out.println("No commands available");
 			return null;
 		}
 	}
@@ -48,7 +49,7 @@ public class Listener extends Thread{
 			if(io){
 				int toDo = getInt();
 				Point point = new Point(getInt(),getInt());
-				if(toDo > 0 && point.x > 0 && point.y > 0){
+				if(toDo >= 0 && point.x >= 0 && point.y >= 0){
 					Command command = new Command(toDo,point);
 					commandList.add(command);
 				}

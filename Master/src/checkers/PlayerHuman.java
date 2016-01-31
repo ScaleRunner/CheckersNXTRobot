@@ -112,4 +112,16 @@ public class PlayerHuman implements Player, MouseListener{
 	public void setBoard (Board b){
 		this.b = b;
 	}
+
+	@Override
+	public Move doAnyMove(Board board) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Move getMove2(Board board) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -1,33 +1,40 @@
 package communication;
 
+import java.io.BufferedOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 
 import lejos.pc.comm.NXTConnector;
+import lejos.pc.comm.NXTInfo;
 
 public class Connection {
-	public static NXTConnector link;
-	private static DataOutputStream dataOut;
-	private static DataInputStream dataIn;
+	public NXTConnector link;
+	private DataOutputStream dataOut;
+	private DataInputStream dataIn;
+
+	public Connection(DataInputStream dataIn, DataOutputStream dataOut){
+		this.dataIn = dataIn;
+		this.dataOut = dataOut;
+	}
 	
-	public Connection(){
+	public Connection(NXTInfo nxtInfo){
 		link = new NXTConnector();
 		
-		if(!link.connectTo("usb://")){
-			System.out.println("No NXT found using USB");
+		if(!link.connectTo(nxtInfo.name, nxtInfo.deviceAddress, nxtInfo.protocol)){
+			System.out.println("No NXT found using protocol " + nxtInfo.protocol);
 		}
 		else{
-			dataOut = new DataOutputStream(link.getOutputStream());
+			dataOut = new DataOutputStream(new BufferedOutputStream(link.getOutputStream(),1024));
 			dataIn = new DataInputStream(link.getInputStream());
-			System.out.println("Connection established");
+			System.out.println("Connection with " + nxtInfo.name + " made.");
 		}
 	}
 	
-	public DataOutputStream getOutputStream(){
+	public DataOutputStream getDataOutputStream(){
 		return dataOut;
 	}
 	
-	public DataInputStream getInputStream(){
+	public DataInputStream getDataInputStream(){
 		return dataIn;
 	}
 	
