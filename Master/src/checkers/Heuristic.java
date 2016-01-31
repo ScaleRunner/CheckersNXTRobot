@@ -61,21 +61,23 @@ public class Heuristic {
 	
 	//Returns the total heuristic value
 	public int totalHeuristic(Board board){
+		int heuristic = 0;
+		
 		if(board.isWin("black")){
-			return Integer.MAX_VALUE - 100;
+			heuristic+= -500;
 		}
 		if(board.isLose("black")){
-			return Integer.MIN_VALUE + 100;
+			heuristic += 500;
 		}
 		
 		this.board = board;
 		this.size = board.getSize();
 		
-		int heuristic = 0;
-		heuristic = pawns() *2
+		heuristic = heuristic
+					+ pawns() *2
 					+ kings()*5
 					+ safePawns()
-					+ attackingPawns()
+//					+ attackingPawns()
 					;
 		return heuristic;
 	}		
